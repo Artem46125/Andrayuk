@@ -3,6 +3,7 @@ package CipherCesar;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import Exception.ReadFileException;
 
@@ -17,9 +18,13 @@ public class FileManager {
             throw new ReadFileException("Ошибка чтения файла");
         }
 
-        // Логика чтения файла
     }
     public void writeFile(String content, String filePath) {
-        // Логика записи файла
+        try {
+            Path path = Path.of(filePath);
+            Files.writeString(path,content, StandardOpenOption.CREATE);
+        } catch (IOException ex) {
+            throw new ReadFileException("Ошибка записи файла");
+        }
     }
 }
